@@ -40,14 +40,23 @@ class FamilyStructure:
         return generated_id
 
     def add_member(self, member):
-        self._members.append(member)
+        new_member = {
+                "id": self._generate_id(),
+                "first_name": member['first_name'],
+                "last_name": self.last_name,
+                "age": member['age'],
+                "lucky_numbers": member['lucky_numbers']
+        }
+        self._members.append(new_member)
+        return new_member
 
     def delete_member(self, id):
-        new_family = list(filter(lambda x: x.id != id, self._members))
+        new_family = list(filter(lambda x: x['id'] != id, self._members))
         self._members = new_family
 
     def get_member(self, id):
-        return list(filter(lambda x: x.id == id, self._members))
+        member = list(filter(lambda x: x['id'] == id, self._members))
+        return member[0]
 
     # This method is done, it returns a list with all the family members
     def get_all_members(self):
